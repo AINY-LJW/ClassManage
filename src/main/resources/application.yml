@@ -1,0 +1,46 @@
+server:
+  port: 8700
+spring:
+
+#开发阶段设置缓存关闭  
+  freemarker:
+    cache: false 
+  application:
+    name: porvider-user
+  datasource: 
+    # 使用druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/lfhclass?useUnicode=true&serverTimezone=UTC
+    username: root
+    password: 
+    driver-class-name: com.mysql.jdbc.Driver
+    #连接池的配置信息
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  main: 
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，允许覆盖注册
+# MyBatis 配置
+# mybatis的mapper.xml文件的路径
+mybatis: 
+  mapper-locations: classpath:mapper/*.xml
+# mybatis的model所在的包
+  type-aliases-package: com.lfh.classManage.entity
+  configuration:
+    mapUnderscoreToCamelCase: true # 开启驼峰命名转换法
+#系统名称以及登录用户配置 
+system:
+  title: Demo33
+  loginUser: admin
+  loginPwd: admin
